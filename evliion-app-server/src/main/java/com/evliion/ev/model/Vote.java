@@ -11,7 +11,10 @@ import javax.persistence.*;
         })
 })
 public class Vote extends DateAudit {
-    @Id
+   
+	private static final long serialVersionUID = -5835776943659720557L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

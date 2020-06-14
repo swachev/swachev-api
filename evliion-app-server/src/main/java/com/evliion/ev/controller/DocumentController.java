@@ -38,68 +38,37 @@ public class DocumentController {
 	FileStorageService fileStorageService;
 
 	@PostMapping(value = "/uploadFile")
-	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@RequestBody UpLoadFilesRequest request) {
-		String fileName = fileStorageService.storeFile(file, request.getCountryName(), request.getDocumentType());
+	public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("countryName") String countryName,
+												@RequestParam("docType") String docType) {
+		String fileName = fileStorageService.storeFile(file, countryName, docType);
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
 				.path(fileName).toUriString();
 		return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
 	}
 		
-	@GetMapping("/downloadFile")
-	public ResponseEntity<Resource> downloadFile(@RequestParam("docType") String docType, HttpServletRequest request) {
-		String fileName = fileStorageService.getDocumentName(docType);
-		Resource resource = null;
-		if (fileName != null && !fileName.isEmpty()) {
-			try {
-				resource = fileStorageService.loadFileAsResource(fileName);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			String contentType = null;
-			try {
-				contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-			} catch (IOException ex) {
-				logger.info("Could not determine file type." + ex.getMessage());
-			}
-			if (contentType == null) {
-				contentType = "application/octet-stream";
-			}
-			return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
-					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-					.body(resource);
-		} else {
-			return ResponseEntity.notFound().build();
+	@GetMapping("/downloadFile/{fileName}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+        Resource resource = null;
+		try {
+			resource = fileStorageService.loadFileAsResource(fileName);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	}
-	
-//	@GetMapping("/downloadFile/{fileName}")
-//    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-//        // Load file as Resource
-//        Resource resource = null;
-//		try {
-//			resource = fileStorageService.loadFileAsResource(fileName);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//        // Try to determine file's content type
-//        String contentType = null;
-//        try {
-//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-//        } catch (IOException ex) {
-//            logger.info("Could not determine file type.");
-//        }
-//
-//        // Fallback to the default content type if type could not be determined
-//        if(contentType == null) {
-//            contentType = "application/octet-stream";
-//        }
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.parseMediaType(contentType))
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-//                .body(resource);
-//    }
+
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
 
 }

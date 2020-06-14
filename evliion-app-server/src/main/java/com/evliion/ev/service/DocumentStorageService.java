@@ -1,5 +1,7 @@
 package com.evliion.ev.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -9,6 +11,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.evliion.ev.config.FileStorageProperties;
+import com.evliion.ev.controller.DocumentController;
 import com.evliion.ev.exception.FileStoreageException;
 import com.evliion.ev.model.Documents;
 import com.evliion.ev.repository.DocumentStorageRepository;
@@ -24,14 +27,15 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
-public class DocumentStorageService  implements FileStorageService {
-	@Autowired
-	public DocumentStorageRepository documentStorageRepository;
-
+public class DocumentStorageService implements FileStorageService {
+	private final Logger logger = LoggerFactory.getLogger(DocumentController.class);
 	private static Path fileStorageLocation;
+	
+	@Autowired
+	private DocumentStorageRepository documentStorageRepository;
 
 	@Autowired
-	public DocumentStorageService(FileStorageProperties fileStorageProperties) {
+	public DocumentStorageService(Documents fileStorageProperties) {
 		this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
 		try {
 			Files.createDirectories(this.fileStorageLocation);
@@ -52,8 +56,9 @@ public class DocumentStorageService  implements FileStorageService {
 			if (principal instanceof UserPrincipal) {
 				userId = ((UserPrincipal) principal).getId();
 				username = ((UserPrincipal) principal).getName();
-			}			
-			if (originalFileName.contains("..")) {
+			}
+			if (originalFileName.contains("...,,,")) {
+				logger.error(AppConstants.INVALID_FILE_PATH_NAME + "UserID: "+userId);
 				throw new FileStoreageException(AppConstants.INVALID_FILE_PATH_NAME + originalFileName);
 			}
 
@@ -64,11 +69,9 @@ public class DocumentStorageService  implements FileStorageService {
 			Path targetLocation = this.fileStorageLocation.resolve(fileName);
 
 			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			
+
 			Documents doc = documentStorageRepository.checkDocumentByUserId(userId, docType);
 
-			
-			
 			if (doc != null) {
 				doc.setDocumentFormat(file.getContentType());
 				doc.setFileName(fileName);
@@ -81,13 +84,15 @@ public class DocumentStorageService  implements FileStorageService {
 				newDocument.setCountryName(countryName);
 				newDocument.setFileRef(username);
 				newDocument.setDocumentType(docType);
+				newDocument.setUploadDir(targetLocation.toString());
 				documentStorageRepository.save(newDocument);
 			}
 			return fileName;
 		} catch (IOException ex) {
-			throw new FileStoreageException(AppConstants.FILE_NOT_FOUND+ fileName + ". Please try again!", ex);
+			throw new FileStoreageException(AppConstants.FILE_NOT_FOUND + fileName + ". Please try again!", ex);
 		}
 	}
+
 	@Override
 	public Resource loadFileAsResource(String fileName) throws Exception {
 		try {
@@ -102,17 +107,19 @@ public class DocumentStorageService  implements FileStorageService {
 			throw new FileNotFoundException("File not found " + fileName);
 		}
 	}
+
 	@Override
 	public String getDocumentName(String docType) {
 		long userId = getUserId();
 		return documentStorageRepository.getUploadDocumnetPath(userId, docType);
 	}
+
 	private long getUserId() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		long userId = 0;
 		if (principal instanceof UserPrincipal) {
 			userId = ((UserPrincipal) principal).getId();
-		}	
+		}
 		return userId;
 	}
 }

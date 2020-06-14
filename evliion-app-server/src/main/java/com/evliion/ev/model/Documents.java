@@ -13,6 +13,7 @@ import com.evliion.ev.util.AppConstants;
 
 @Entity
 @Table(name = "documents")
+@ConfigurationProperties(prefix = AppConstants.FILE_PROPERTIES_PREFIX)
 public class Documents {
 
 	@Id
