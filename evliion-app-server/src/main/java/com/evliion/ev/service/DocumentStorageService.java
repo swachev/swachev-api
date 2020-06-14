@@ -10,7 +10,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.evliion.ev.config.FileStorageProperties;
 import com.evliion.ev.controller.DocumentController;
 import com.evliion.ev.exception.FileStoreageException;
 import com.evliion.ev.model.Documents;
