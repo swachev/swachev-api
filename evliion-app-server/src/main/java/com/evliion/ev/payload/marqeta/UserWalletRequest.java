@@ -2,13 +2,13 @@ package com.evliion.ev.payload.marqeta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateUserRequest {
+public class UserWalletRequest {
   private String email;
 
   @JsonProperty("first_name")
   private String firstName;
 
-  public CreateUserRequest(String email, String firstName) {
+  public UserWalletRequest(String email, String firstName) {
     this.email = email;
   }
 

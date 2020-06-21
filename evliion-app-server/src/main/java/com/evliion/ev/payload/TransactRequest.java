@@ -8,15 +8,15 @@ public class TransactRequest {
   @NotNull
   private Double amount;
   private String currency;
-  private String merchantId;
+  private Long merchantId;
 
-  public TransactRequest(@Positive @NotNull Double amount, String currency, String merchantId) {
+  public TransactRequest(@Positive @NotNull Double amount, String currency, Long merchantId) {
     this.amount = amount;
     this.currency = currency;
     this.merchantId = merchantId;
   }
 
-  public String getMerchantId() {
+  public Long getMerchantId() {
     return merchantId;
   }
 
