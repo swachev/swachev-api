@@ -8,7 +8,6 @@ import com.evliion.ev.payload.GetWalletResponse;
 import com.evliion.ev.payload.RechargeRequest;
 import com.evliion.ev.payload.TransactRequest;
 import com.evliion.ev.payload.marqeta.UserBalanceResponse;
-import com.evliion.ev.payload.marqeta.UserFundSourceResponse;
 import com.evliion.ev.service.WalletService;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -34,7 +33,7 @@ public class WalletController {
   @PreAuthorize("hasRole('USER')")
   public ResponseEntity<ApiResponse> activateWallet() {
     walletService.activateWallet();
-    return new ResponseEntity<>(new ApiResponse(true, "UserWallet activated successfully"), HttpStatus.OK);
+    return new ResponseEntity<>(new ApiResponse(true, "User wallet activated successfully"), HttpStatus.OK);
   }
 
   @PostMapping("/card")
