@@ -1,5 +1,6 @@
 package com.evliion.ev.service;
-
+ 
+import static  org.springframework.data.domain.Sort.by;
 import com.evliion.ev.exception.BadRequestException;
 import com.evliion.ev.exception.ResourceNotFoundException;
 import com.evliion.ev.model.*;
@@ -125,7 +126,7 @@ public class PollService {
         // Retrieve all poll details from the voted pollIds.
         List<Long> pollIds = userVotedPollIds.getContent();
 
-        Sort sort = new Sort(Sort.Direction.DESC, "createdAt");
+        Sort sort = by(Sort.Direction.DESC, "createdAt");
         List<Poll> polls = pollRepository.findByIdIn(pollIds, sort);
 
         // Map Polls to PollResponses containing vote counts and poll creator details

@@ -1,13 +1,9 @@
 package com.evliion.ev.model;
 
 import com.evliion.ev.model.audit.DateAudit;
-import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -16,7 +12,10 @@ import java.util.Set;
 @Entity
 @Table(name = "vehicle")
 public class Vehicle extends DateAudit {
-    @Id
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
