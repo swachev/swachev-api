@@ -14,7 +14,7 @@ public class Vote extends DateAudit {
    
 	private static final long serialVersionUID = -5835776943659720557L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

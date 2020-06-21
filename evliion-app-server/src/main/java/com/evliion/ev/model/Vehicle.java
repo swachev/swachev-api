@@ -15,26 +15,28 @@ public class Vehicle extends DateAudit {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 15)
     private String make;
 
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 15)
     private String model;
 
     @NotBlank
-    @Size(max = 40)
-    private String vehicle_type;
-
-
-    @Column(name="user_id")
-    private Long userId;
-
+    @Size(max = 15)
+    private String vehicleType;
+    
+    private int batteryCapacity;
+    
     public Long getId() {
         return id;
     }
@@ -59,19 +61,27 @@ public class Vehicle extends DateAudit {
         this.model = model;
     }
 
-    public String getVehicle_type() {
-        return vehicle_type;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setVehicle_type(String vehicle_type) {
-        this.vehicle_type = vehicle_type;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public Long getUserId() {
-        return userId;
-    }
+	public String getVehicleType() {
+		return vehicleType;
+	}
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
+	public int getBatteryCapacity() {
+		return batteryCapacity;
+	}
+
+	public void setBatteryCapacity(int batteryCapacity) {
+		this.batteryCapacity = batteryCapacity;
+	}
 }

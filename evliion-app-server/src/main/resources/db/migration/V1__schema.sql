@@ -68,6 +68,16 @@ CREATE TABLE `votes` (
   CONSTRAINT `fk_votes_choice_id` FOREIGN KEY (`choice_id`) REFERENCES `choices` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `transactions` (
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `station_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `vehicle_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `trans_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `startTime` varchar(15) NOT NULL,
+  `endTime` varchar(40) NOT NULL,
+  `totalTime` varchar(100) NOT NULL,
+  PRIMARY KEY (`trans_id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `documents` ( 
 	`id` bigint(20) NOT NULL AUTO_INCREMENT , 
