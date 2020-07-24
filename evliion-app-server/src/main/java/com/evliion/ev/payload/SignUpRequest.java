@@ -12,8 +12,8 @@ public class SignUpRequest {
     private String name;
 
     @NotBlank
-    @Size(min = 3, max = 15)
-    private String username;
+    @Size(max = 10)
+    private String mobileNumber;
 
     @NotBlank
     @Size(max = 40)
@@ -32,12 +32,12 @@ public class SignUpRequest {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getEmail() {
