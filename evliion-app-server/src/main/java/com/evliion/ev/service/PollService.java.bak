@@ -74,13 +74,13 @@ public class PollService {
                 polls.getSize(), polls.getTotalElements(), polls.getTotalPages(), polls.isLast());
     }
 
-    public PagedResponse<PollResponse> getPollsCreatedBy(String mobileNumber, UserPrincipal currentUser, int page, int size) {
+    public PagedResponse<PollResponse> getPollsCreatedBy(String username, UserPrincipal currentUser, int page, int size) {
         validatePageNumberAndSize(page, size);
 
-        User user = userRepository.findByUsername(mobileNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "mobileNumber", mobileNumber));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        // Retrieve all polls created by the given mobileNumber
+        // Retrieve all polls created by the given username
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
         Page<Poll> polls = pollRepository.findByCreatedBy(user.getId(), pageable);
 
@@ -105,13 +105,13 @@ public class PollService {
                 polls.getSize(), polls.getTotalElements(), polls.getTotalPages(), polls.isLast());
     }
 
-    public PagedResponse<PollResponse> getPollsVotedBy(String mobileNumber, UserPrincipal currentUser, int page, int size) {
+    public PagedResponse<PollResponse> getPollsVotedBy(String username, UserPrincipal currentUser, int page, int size) {
         validatePageNumberAndSize(page, size);
 
-        User user = userRepository.findByUsername(mobileNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "mobileNumber", mobileNumber));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        // Retrieve all pollIds in which the given mobileNumber has voted
+        // Retrieve all pollIds in which the given username has voted
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
         Page<Long> userVotedPollIds = voteRepository.findVotedPollIdsByUserId(user.getId(), pageable);
 

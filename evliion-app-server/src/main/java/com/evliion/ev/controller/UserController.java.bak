@@ -53,8 +53,8 @@ public class UserController {
     }
 
     @GetMapping("/user/checkUsernameAvailability")
-    public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "mobileNumber") String mobileNumber) {
-        Boolean isAvailable = !userRepository.existsByUsername(mobileNumber);
+    public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
+        Boolean isAvailable = !userRepository.existsByUsername(username);
         return new UserIdentityAvailability(isAvailable);
     }
 
@@ -64,10 +64,10 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/users/{mobileNumber}")
-    public UserProfile getUserProfile(@PathVariable(value = "mobileNumber") String mobileNumber) {
-        User user = userRepository.findByUsername(mobileNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "mobileNumber", mobileNumber));
+    @GetMapping("/users/{username}")
+    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         long pollCount = pollRepository.countByCreatedBy(user.getId());
         long voteCount = voteRepository.countByUserId(user.getId());
@@ -77,21 +77,21 @@ public class UserController {
         return userProfile;
     }
 
-    @GetMapping("/users/{mobileNumber}/polls")
-    public PagedResponse<PollResponse> getPollsCreatedBy(@PathVariable(value = "mobileNumber") String mobileNumber,
+    @GetMapping("/users/{username}/polls")
+    public PagedResponse<PollResponse> getPollsCreatedBy(@PathVariable(value = "username") String username,
                                                          @CurrentUser UserPrincipal currentUser,
                                                          @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                          @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return pollService.getPollsCreatedBy(mobileNumber, currentUser, page, size);
+        return pollService.getPollsCreatedBy(username, currentUser, page, size);
     }
 
 
-    @GetMapping("/users/{mobileNumber}/votes")
-    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "mobileNumber") String mobileNumber,
+    @GetMapping("/users/{username}/votes")
+    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "username") String username,
                                                        @CurrentUser UserPrincipal currentUser,
                                                        @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                        @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return pollService.getPollsVotedBy(mobileNumber, currentUser, page, size);
+        return pollService.getPollsVotedBy(username, currentUser, page, size);
     }
 
     @PostMapping("/vehicle/")
