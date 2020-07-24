@@ -7,7 +7,7 @@ import com.evliion.ev.model.User;
 import com.evliion.ev.payload.ApiResponse;
 import com.evliion.ev.payload.JwtAuthenticationResponse;
 import com.evliion.ev.payload.LoginRequest;
-import com.evliion.ev.payload.SignUpRequest;
+import com.evliion.ev.payload.SignUpRequestV2;
 import com.evliion.ev.repository.RoleRepository;
 import com.evliion.ev.repository.UserRepository;
 import com.evliion.ev.security.JwtTokenProvider;
@@ -68,11 +68,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequestV2 signUpRequest) {
 
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
@@ -80,7 +76,7 @@ public class AuthController {
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
+        User user = new User(signUpRequest.getName(), signUpRequest.getMobileNumber(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
