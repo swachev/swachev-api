@@ -38,7 +38,7 @@ public class UserSummary {
     }
 
     public void setMobileNumber(String mobileNumber) {
-        this.username = mobileNumber;
+        this.mobileNumber = mobileNumber;
     }
 
     public String getName() {
