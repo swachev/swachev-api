@@ -55,6 +55,12 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
+    @GetMapping("/user/checkMobileNumberAvailability")
+    public UserIdentityAvailability checkMobileNumberAvailability(@RequestParam(value = "mobileNumber") String mobileNumber) {
+        Boolean isAvailable = !userRepository.existsByMobileNumber(mobileNumber);
+        return new UserIdentityAvailability(isAvailable);
+    }
+
     @GetMapping("/user/checkEmailAvailability")
     public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
         Boolean isAvailable = !userRepository.existsByEmail(email);

@@ -34,7 +34,7 @@ public class User extends DateAudit {
     private String name;
 
     @NotBlank
-    @Size(min = 10, max = 10)
+    @Size(min = 10, max = 13)
     private String mobileNumber;
 
     @NaturalId
