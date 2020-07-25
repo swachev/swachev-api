@@ -11,6 +11,7 @@ import com.evliion.ev.payload.SignUpRequestV2;
 import com.evliion.ev.repository.RoleRepository;
 import com.evliion.ev.repository.UserRepository;
 import com.evliion.ev.security.JwtTokenProvider;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +26,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
 
+import javax.validation.Valid;
+
 /**
- * 
+ *
  */
 @RestController
 @RequestMapping("/api/auth")
@@ -70,11 +72,13 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequestV2 signUpRequest) {
 
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByMobileNumber(signUpRequest.getMobileNumber())) {
+            return new ResponseEntity(new ApiResponse(false, "Mobile Number already in use!"),
+                    HttpStatus.BAD_REQUEST);
 
         }
 
-        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
