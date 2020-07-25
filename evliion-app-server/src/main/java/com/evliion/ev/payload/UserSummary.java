@@ -7,20 +7,20 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class UserSummary {
     private Long id;
-    private String username;
+    private String mobileNumber;
     private String name;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserSummary(Long id, String username, String name) {
+    public UserSummary(Long id, String mobileNumber, String name) {
         this.id = id;
-        this.username = username;
+        this.mobileNumber = mobileNumber;
         this.name = name;
         
     }
-    public UserSummary(Long id, String username, String name, Collection<? extends GrantedAuthority> authorities) {
+    public UserSummary(Long id, String mobileNumber, String name, Collection<? extends GrantedAuthority> authorities) {
 		super();
 		this.id = id;
-		this.username = username;
+		this.mobileNumber = mobileNumber;
 		this.name = name;
 		this.authorities = authorities;
 	}
@@ -33,12 +33,12 @@ public class UserSummary {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMobileNumber(String mobileNumber) {
+        this.username = mobileNumber;
     }
 
     public String getName() {
