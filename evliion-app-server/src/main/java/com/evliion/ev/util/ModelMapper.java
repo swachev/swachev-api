@@ -95,7 +95,7 @@ public class ModelMapper {
     	vehicleResponse.setModel(vehicle.getModel());
     	vehicleResponse.setVehicleType(vehicle.getVehicleType());
     	vehicleResponse.setBatteryCapacity(vehicle.getBatteryCapacity());
-    	UserSummary creatorSummary = new UserSummary(creator.getId(), creator.getUsername(), creator.getName());
+    	UserSummary creatorSummary = new UserSummary(creator.getId(), creator.getMobileNumber(), creator.getName());
     	//vehicleResponse.setCreatedBy(creatorSummary);
     	return vehicleResponse;
     }

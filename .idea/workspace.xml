@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38a95728-1262-4706-9a41-f01df1a522f6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/UserSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/UserSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/marqeta/PaymentCardRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/marqeta/PaymentCardRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/util/ModelMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/util/ModelMapper.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -38,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/util/ModelMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+            <state relative-caret-position="365">
+              <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,11 +50,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/UserSummary.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="223">
+              <caret line="22" column="41" lean-forward="true" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/UserProfile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -74,8 +83,10 @@
     <findStrings>
       <find>regi</find>
       <find>SignUpRequest</find>
-      <find>User</find>
       <find>userNam</find>
+      <find>userName</find>
+      <find>Usert</find>
+      <find>User</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -89,8 +100,9 @@
         <option value="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/controller/AuthController.java" />
         <option value="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/model/User.java" />
         <option value="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/SignUpRequestV2.java" />
-        <option value="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/util/ModelMapper.java" />
         <option value="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/UserSummary.java" />
+        <option value="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/marqeta/PaymentCardRequest.java" />
+        <option value="$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/util/ModelMapper.java" />
       </list>
     </option>
   </component>
@@ -249,6 +261,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -282,12 +295,12 @@
       <option name="presentableId" value="Default" />
       <updated>1595625457433</updated>
       <workItem from="1595625458560" duration="2252000" />
-      <workItem from="1595657284699" duration="1741000" />
+      <workItem from="1595657284699" duration="2825000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3993000" />
+    <option name="totallyTimeSpent" value="5077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="27" y="23" width="1080" height="794" extended-state="0" />
@@ -388,13 +401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/SignUpRequestV2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/repository/UserRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -419,20 +425,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/util/ModelMapper.java">
+    <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/SignUpRequestV2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="220">
+          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/UserSummary.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="223">
+          <caret line="22" column="41" lean-forward="true" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/payload/UserProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/evliion-app-server/src/main/java/com/evliion/ev/util/ModelMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
