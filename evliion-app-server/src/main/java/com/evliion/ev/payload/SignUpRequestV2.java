@@ -11,7 +11,7 @@ public class SignUpRequestV2 {
     private String name;
 
     @NotBlank
-    @Size(min = 13, max = 13)
+    @Size(min = 11, max = 13)
     private String mobileNumber;
 
     @NotBlank
