@@ -16,6 +16,8 @@ public class UserPrincipal implements UserDetails {
 
     private String name;
 
+    private String username;
+
     private String mobileNumber;
 
     @JsonIgnore
@@ -62,10 +64,12 @@ public class UserPrincipal implements UserDetails {
         return email;
     }
 
-    @Override
     public String getMobileNumber() {
         return mobileNumber;
     }
+
+    @Override
+    public String getUsername() { return username; }
 
     @Override
     public String getPassword() {
