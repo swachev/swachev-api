@@ -10,7 +10,7 @@ public class UserProfile {
     private Long pollCount;
     private Long voteCount;
 
-    public UserProfile(Long id, String username, String mobileNumber, Instant joinedAt, Long pollCount, Long voteCount) {
+    public UserProfile(Long id, String mobileNumber, String name, Instant joinedAt, Long pollCount, Long voteCount) {
         this.id = id;
         this.mobileNumber = mobileNumber;
         this.name = name;

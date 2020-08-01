@@ -16,8 +16,6 @@ public class UserPrincipal implements UserDetails {
 
     private String name;
 
-    private String username;
-
     private String mobileNumber;
 
     @JsonIgnore
@@ -69,7 +67,7 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
-    public String getUsername() { return username; }
+    public String getUsername() { return mobileNumber; }
 
     @Override
     public String getPassword() {

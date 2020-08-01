@@ -22,22 +22,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String usernameOrEmail)
-            throws UsernameNotFoundException {
-        return UserPrincipal.create(new User());
-    }
-
-    @Transactional
-    public UserDetails loadUserByMobileNumber(String mobileNumberOrEmail)
-            throws UsernameNotFoundException {
-        // Let people login with either mobilenumber or email
-        User user = userRepository.findByMobileNumberOrEmail(mobileNumberOrEmail, mobileNumberOrEmail)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with mobile number or email : " + mobileNumberOrEmail)
-        );
-
-        return UserPrincipal.create(user);
-    }
+	public UserDetails loadUserByUsername(String mobileNumberOrEmail) throws UsernameNotFoundException {
+		// Let people login with either mobilenumber or email
+		User user = userRepository.findByMobileNumberOrEmail(mobileNumberOrEmail, mobileNumberOrEmail)
+				.orElseThrow(() -> new UsernameNotFoundException(
+						"User not found with mobile number or email : " + mobileNumberOrEmail));
+		return UserPrincipal.create(user);
+	}
 
     @Transactional
     public UserDetails loadUserById(Long id) {
