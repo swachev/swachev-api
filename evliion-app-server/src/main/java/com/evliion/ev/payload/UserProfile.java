@@ -4,15 +4,15 @@ import java.time.Instant;
 
 public class UserProfile {
     private Long id;
-    private String username;
+    private String mobileNumber;
     private String name;
     private Instant joinedAt;
     private Long pollCount;
     private Long voteCount;
 
-    public UserProfile(Long id, String username, String name, Instant joinedAt, Long pollCount, Long voteCount) {
+    public UserProfile(Long id, String username, String mobileNumber, Instant joinedAt, Long pollCount, Long voteCount) {
         this.id = id;
-        this.username = username;
+        this.mobileNumber = mobileNumber;
         this.name = name;
         this.joinedAt = joinedAt;
         this.pollCount = pollCount;
@@ -27,12 +27,12 @@ public class UserProfile {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getName() {

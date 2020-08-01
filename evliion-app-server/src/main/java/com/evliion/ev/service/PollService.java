@@ -75,11 +75,11 @@ public class PollService {
                 polls.getSize(), polls.getTotalElements(), polls.getTotalPages(), polls.isLast());
     }
 
-    public PagedResponse<PollResponse> getPollsCreatedBy(String username, UserPrincipal currentUser, int page, int size) {
+    public PagedResponse<PollResponse> getPollsCreatedBy(String mobileNumber, UserPrincipal currentUser, int page, int size) {
         validatePageNumberAndSize(page, size);
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+        User user = userRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "mobileNumber", mobileNumber));
 
         // Retrieve all polls created by the given username
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
@@ -106,11 +106,11 @@ public class PollService {
                 polls.getSize(), polls.getTotalElements(), polls.getTotalPages(), polls.isLast());
     }
 
-    public PagedResponse<PollResponse> getPollsVotedBy(String username, UserPrincipal currentUser, int page, int size) {
+    public PagedResponse<PollResponse> getPollsVotedBy(String mobileNumber, UserPrincipal currentUser, int page, int size) {
         validatePageNumberAndSize(page, size);
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+        User user = userRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "mobileNumber", mobileNumber));
 
         // Retrieve all pollIds in which the given username has voted
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");

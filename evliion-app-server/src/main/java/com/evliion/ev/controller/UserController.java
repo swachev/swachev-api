@@ -45,13 +45,13 @@ public class UserController {
     @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         //UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName());
-    	UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName(), currentUser.getAuthorities());
+    	UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getMobileNumber(), currentUser.getName(), currentUser.getAuthorities());
         return userSummary;
     }
 
-    @GetMapping("/user/checkUsernameAvailability")
-    public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
-        Boolean isAvailable = !userRepository.existsByUsername(username);
+    @GetMapping("/user/checkMobileNumberAvailability")
+    public UserIdentityAvailability checkMobileNumberAvailability(@RequestParam(value = "mobileNumber") String mobileNumber) {
+        Boolean isAvailable = !userRepository.existsByMobileNumber(mobileNumber);
         return new UserIdentityAvailability(isAvailable);
     }
 
@@ -61,34 +61,34 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/users/{username}")
-    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+    @GetMapping("/users/{mobileNumber}")
+    public UserProfile getUserProfile(@PathVariable(value = "mobileNumber") String mobileNumber) {
+        User user = userRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "mobileNumber", mobileNumber));
 
         long pollCount = pollRepository.countByCreatedBy(user.getId());
         long voteCount = voteRepository.countByUserId(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getCreatedAt(), pollCount, voteCount);
+        UserProfile userProfile = new UserProfile(user.getId(), user.getMobileNumber(), user.getName(), user.getCreatedAt(), pollCount, voteCount);
 
         return userProfile;
     }
 
-    @GetMapping("/users/{username}/polls")
-    public PagedResponse<PollResponse> getPollsCreatedBy(@PathVariable(value = "username") String username,
+    @GetMapping("/users/{mobileNumber}/polls")
+    public PagedResponse<PollResponse> getPollsCreatedBy(@PathVariable(value = "mobileNumber") String mobileNumber,
                                                          @CurrentUser UserPrincipal currentUser,
                                                          @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                          @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return pollService.getPollsCreatedBy(username, currentUser, page, size);
+        return pollService.getPollsCreatedBy(mobileNumber, currentUser, page, size);
     }
 
 
-    @GetMapping("/users/{username}/votes")
-    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "username") String username,
+    @GetMapping("/users/{mobileNumber}/votes")
+    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "mobileNumber") String mobileNumber,
                                                        @CurrentUser UserPrincipal currentUser,
                                                        @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                        @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return pollService.getPollsVotedBy(username, currentUser, page, size);
+        return pollService.getPollsVotedBy(mobileNumber, currentUser, page, size);
     }
 
     @PostMapping("/vehicle/")

@@ -11,8 +11,8 @@ public class SignUpRequestV2 {
     private String name;
 
     @NotBlank
-    @Size(min = 10, max = 10)
-    private int mobileNumber;
+    @Size(min = 11, max = 13)
+    private String mobileNumber;
 
     @NotBlank
     @Size(max = 40)
@@ -47,11 +47,11 @@ public class SignUpRequestV2 {
         this.password = password;
     }
 
-	public int getMobileNumber() {
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(int mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 }
