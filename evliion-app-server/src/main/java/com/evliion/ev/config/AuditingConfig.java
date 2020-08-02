@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Configuration
 @EnableJpaAuditing
+//unused class
 public class AuditingConfig {
 
     @Bean
